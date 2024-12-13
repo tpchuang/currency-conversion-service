@@ -1,5 +1,6 @@
 package com.example.tpchuang.currencyconversion.currencyconversionservice;
 
+import com.example.tpchuang.currencyconversion.currencyexchangeservice.CurrencyExchange;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +26,16 @@ public class CurrencyConversionController {
     uriVariables.put("from", from);
     uriVariables.put("to", to);
 
-    ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
-        "http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversion.class,
+    ResponseEntity<CurrencyExchange> responseEntity = restTemplate.getForEntity(
+        "http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyExchange.class,
         uriVariables);
 
-    CurrencyConversion currencyConversion = responseEntity.getBody();
+    CurrencyExchange currencyExchange = responseEntity.getBody();
 
-    return new CurrencyConversion(currencyConversion.getId(), from, to, quantity,
-        currencyConversion.getConversionMultiple(),
-        quantity.multiply(currencyConversion.getConversionMultiple()),
-        currencyConversion.getEnvironment() + " " + "rest template");
+    return new CurrencyConversion(currencyExchange.getId(), from, to, quantity,
+        currencyExchange.getConversionMultiple(),
+        quantity.multiply(currencyExchange.getConversionMultiple()),
+        currencyExchange.getEnvironment() + " " + "rest template");
 
   }
 
@@ -42,12 +43,12 @@ public class CurrencyConversionController {
   public CurrencyConversion calculateCurrencyConversionFeign(@PathVariable String from,
       @PathVariable String to, @PathVariable BigDecimal quantity) {
 
-    CurrencyConversion currencyConversion = proxy.retrieveExchangeValue(from, to);
+    CurrencyExchange currencyExchange = proxy.retrieveExchangeValue(from, to);
 
-    return new CurrencyConversion(currencyConversion.getId(), from, to, quantity,
-        currencyConversion.getConversionMultiple(),
-        quantity.multiply(currencyConversion.getConversionMultiple()),
-        currencyConversion.getEnvironment() + " " + "feign");
+    return new CurrencyConversion(currencyExchange.getId(), from, to, quantity,
+        currencyExchange.getConversionMultiple(),
+        quantity.multiply(currencyExchange.getConversionMultiple()),
+        currencyExchange.getEnvironment() + " " + "feign");
   }
 
 }

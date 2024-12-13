@@ -38,9 +38,26 @@ Major revision including
 
 - http://localhost:9411/
 
+## Build
+
+In project root,
+
+1. install modules to local repository
+   ```shell
+   mvn dependency:resolve
+   ```
+
+2. update a module in local repository
+   ```shell
+   mvn install -pl currency-exchange-service -am
+   ```
+
 ## Deployment
 
-1. Start zipkin server `docker run -p 9411:9411 openzipkin/zipkin:3.4`
+1. Start zipkin server
+   ```shell
+   docker run -p 9411:9411 openzipkin/zipkin:3.4
+   ```
 2. Start Eureka naming service
 3. Start Currency Exchange Service
 4. Start Currency Conversion Service
