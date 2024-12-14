@@ -24,10 +24,8 @@
   </properties>
 
   <modules>
-    <module>naming-server</module>
     <module>currency-exchange-service</module>
     <module>currency-conversion-service</module>
-    <module>api-gateway</module>
   </modules>
 
   <dependencies>
