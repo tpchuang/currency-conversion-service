@@ -11,8 +11,7 @@
   </parent>
 
   <artifactId>currency-exchange-service</artifactId>
-  <name>currency-exchange-service</name>
-  <description>Currency exchange microservice</description>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
@@ -44,20 +43,5 @@
       <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <image>
-            <name>tpchuang/${project.artifactId}:${project.version}</name>
-          </image>
-          <pullPolicy>IF_NOT_PRESENT</pullPolicy>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>
